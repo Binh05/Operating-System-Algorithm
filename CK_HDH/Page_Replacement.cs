@@ -38,6 +38,7 @@ namespace CK_HDH
         private void btnRun_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtFrame.Text, out int frames) || frames <= 0)
+
             { 
                 MessageBox.Show("Số frame không hợp lệ.");
                 return;
@@ -95,39 +96,47 @@ namespace CK_HDH
             lblArray.Text = referenceString.Count == 0 ? "No Item" : string.Join(" ", referenceString);
         }
 
+
         private void RunOptimal(int frameCount, List<int> pages)
         {
             dgvSimulation.Rows.Clear();
             dgvSimulation.Columns.Clear();
+
             for (int i = 0; i < pages.Count; i++)
                 dgvSimulation.Columns.Add($"col{i}", pages[i].ToString());
 
             List<int?> frames = new List<int?>(new int?[frameCount]);
             List<List<int?>> history = new List<List<int?>>();
             List<bool> faultHistory = new List<bool>();
+
             int pageFaults = 0;
 
             for (int t = 0; t < pages.Count; t++)
             {
                 int page = pages[t];
+
                 bool isFault = false;
 
                 if (!frames.Contains(page))
                 {
                     isFault = true;
+
                     pageFaults++;
 
                     if (frames.Contains(null))
                     {
+
                         frames[frames.IndexOf(null)] = page;
                     }
                     else
                     {
                         int replaceIndex = 0, farthest = -1;
+
                         for (int i = 0; i < frames.Count; i++)
                         {
                             int? f = frames[i];
                             int nextUse = pages.FindIndex(t + 1, x => x == f);
+
                             if (nextUse == -1)
                             {
                                 replaceIndex = i;
@@ -139,6 +148,7 @@ namespace CK_HDH
                                 replaceIndex = i;
                             }
                         }
+
                         frames[replaceIndex] = page;
                     }
                 }
@@ -211,6 +221,7 @@ namespace CK_HDH
 
                 history.Add(new List<int?>(frames));
                 faultHistory.Add(isFault); // lưu page fault đúng
+
             }
 
             // Vẽ lên dgv
@@ -230,6 +241,7 @@ namespace CK_HDH
             dgvSimulation.Rows[frameCount].HeaderCell.Value = "Page Fault";
             for (int j = 0; j < pages.Count; j++)
             {
+
                 dgvSimulation.Rows[frameCount].Cells[j].Value = faultHistory[j] ? "F" : "";
             }
         }
@@ -374,6 +386,7 @@ namespace CK_HDH
             for (int j = 0; j < faultHistory.Count; j++)
                 dgvSimulation.Rows[frameCount].Cells[j].Value = faultHistory[j] ? "F" : "";
         }
+
 
 
     }

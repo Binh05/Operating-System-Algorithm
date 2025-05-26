@@ -44,7 +44,9 @@
             this.cbAlgorithm = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnRun = new System.Windows.Forms.Button();
+
             this.btnDelete = new System.Windows.Forms.Button();
+
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimulation)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,7 +111,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.label4.Location = new System.Drawing.Point(279, 105);
+
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(173, 17);
             this.label4.TabIndex = 7;
@@ -117,7 +121,9 @@
             // 
             // txtNum
             // 
+
             this.txtNum.Location = new System.Drawing.Point(458, 103);
+
             this.txtNum.Name = "txtNum";
             this.txtNum.Size = new System.Drawing.Size(75, 23);
             this.txtNum.TabIndex = 8;
@@ -125,7 +131,9 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.btnAdd.Location = new System.Drawing.Point(539, 102);
+
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(66, 26);
             this.btnAdd.TabIndex = 9;
@@ -137,7 +145,9 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.label5.Location = new System.Drawing.Point(279, 153);
+
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(131, 17);
             this.label5.TabIndex = 10;
@@ -146,7 +156,9 @@
             // lblArray
             // 
             this.lblArray.AutoSize = true;
+
             this.lblArray.Location = new System.Drawing.Point(416, 154);
+
             this.lblArray.Name = "lblArray";
             this.lblArray.Size = new System.Drawing.Size(58, 16);
             this.lblArray.TabIndex = 11;
@@ -173,16 +185,20 @@
             // cbAlgorithm
             // 
             this.cbAlgorithm.FormattingEnabled = true;
+
             this.cbAlgorithm.Location = new System.Drawing.Point(809, 103);
             this.cbAlgorithm.Name = "cbAlgorithm";
             this.cbAlgorithm.Size = new System.Drawing.Size(97, 24);
+
             this.cbAlgorithm.TabIndex = 14;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.label6.Location = new System.Drawing.Point(678, 105);
+
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(125, 17);
             this.label6.TabIndex = 15;
@@ -198,6 +214,7 @@
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
+
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -209,12 +226,15 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+
             // Page_ReplacementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(942, 534);
+
             this.Controls.Add(this.btnDelete);
+
             this.Controls.Add(this.btnRun);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cbAlgorithm);
@@ -260,6 +280,8 @@
         private System.Windows.Forms.ComboBox cbAlgorithm;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnRun;
+
         private System.Windows.Forms.Button btnDelete;
+
     }
 }

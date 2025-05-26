@@ -42,7 +42,9 @@ namespace CK_HDH
         private void btnLoad_Click(object sender, EventArgs e)
         {
             dgvTienTrinh.Rows.Clear();
+
             panelGanttChart.Controls.Clear();
+
 
             int soTienTrinh;
             if (!int.TryParse(txtP.Text, out soTienTrinh) || soTienTrinh <= 0)
@@ -308,6 +310,7 @@ namespace CK_HDH
 
         private void VeBieuDoGantt(List<Process> processes)
         {
+
             panelGanttChart.Controls.Clear(); // Xoá biểu đồ cũ
             panelGanttChart.AutoScroll = true;
 
@@ -315,6 +318,7 @@ namespace CK_HDH
             int currentLeft = 0; // Vị trí bắt đầu
             int margin = 2;
             int timeLabelTop = 0; // Biến để lưu chiều cao dòng thời gian
+
 
             foreach (var p in processes)
             {
@@ -335,10 +339,12 @@ namespace CK_HDH
                 Label timeLabel = new Label();
                 timeLabel.Text = p.StartTime.ToString();
                 timeLabel.Left = currentLeft;
+
                 timeLabel.Top = lbl.Bottom + margin;
                 timeLabelTop = timeLabel.Top; // Lưu lại chiều cao của timeLabel
                 timeLabel.Width = 20;
                 timeLabel.Font = new Font(timeLabel.Font.FontFamily, 8);
+
                 panelGanttChart.Controls.Add(timeLabel);
 
                 currentLeft += lbl.Width;
@@ -348,6 +354,7 @@ namespace CK_HDH
             var endTimeLabel = new Label();
             endTimeLabel.Text = processes.Last().CompleteTime.ToString();
             endTimeLabel.Left = currentLeft;
+
             endTimeLabel.Top = timeLabelTop; // Đồng bộ vị trí với các timeLabel
             endTimeLabel.Width = 20;
             endTimeLabel.Font = new Font(endTimeLabel.Font.FontFamily, 8);
@@ -358,6 +365,7 @@ namespace CK_HDH
             panelGanttChart.Width = currentLeft + 20;
             panelGanttChart.Left = (this.ClientSize.Width - panelGanttChart.Width) / 2;
         }
+
 
 
         private void button1_Click(object sender, EventArgs e)
