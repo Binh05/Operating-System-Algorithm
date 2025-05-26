@@ -43,6 +43,9 @@ namespace CK_HDH
         {
             dgvTienTrinh.Rows.Clear();
 
+            panelGanttChart.Controls.Clear();
+
+
             int soTienTrinh;
             if (!int.TryParse(txtP.Text, out soTienTrinh) || soTienTrinh <= 0)
             {
@@ -307,10 +310,15 @@ namespace CK_HDH
 
         private void VeBieuDoGantt(List<Process> processes)
         {
-            panelGanttChart.Controls.Clear(); // Xoá biểu đồ cũ nếu có
+
+            panelGanttChart.Controls.Clear(); // Xoá biểu đồ cũ
+            panelGanttChart.AutoScroll = true;
 
             int pixelPerUnit = 30; // Mỗi đơn vị thời gian = 30px
             int currentLeft = 0; // Vị trí bắt đầu
+            int margin = 2;
+            int timeLabelTop = 0; // Biến để lưu chiều cao dòng thời gian
+
 
             foreach (var p in processes)
             {
@@ -331,8 +339,11 @@ namespace CK_HDH
                 Label timeLabel = new Label();
                 timeLabel.Text = p.StartTime.ToString();
                 timeLabel.Left = currentLeft;
-                timeLabel.Top = lbl.Bottom + 2;
-                timeLabel.Width = 40;
+
+                timeLabel.Top = lbl.Bottom + margin;
+                timeLabelTop = timeLabel.Top; // Lưu lại chiều cao của timeLabel
+                timeLabel.Width = 20;
+                timeLabel.Font = new Font(timeLabel.Font.FontFamily, 8);
 
                 panelGanttChart.Controls.Add(timeLabel);
 
@@ -343,14 +354,19 @@ namespace CK_HDH
             var endTimeLabel = new Label();
             endTimeLabel.Text = processes.Last().CompleteTime.ToString();
             endTimeLabel.Left = currentLeft;
-            endTimeLabel.Top = 52;
+
+            endTimeLabel.Top = timeLabelTop; // Đồng bộ vị trí với các timeLabel
+            endTimeLabel.Width = 20;
+            endTimeLabel.Font = new Font(endTimeLabel.Font.FontFamily, 8);
+            endTimeLabel.ForeColor = Color.Black;
             panelGanttChart.Controls.Add(endTimeLabel);
 
             // Căn giữa panelGanttChart theo chiều ngang trong Form
-            panelGanttChart.Width = currentLeft;
+            panelGanttChart.Width = currentLeft + 20;
             panelGanttChart.Left = (this.ClientSize.Width - panelGanttChart.Width) / 2;
-
         }
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
