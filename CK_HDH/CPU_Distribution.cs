@@ -362,8 +362,8 @@ namespace CK_HDH
             panelGanttChart.Controls.Add(endTimeLabel);
 
             // Căn giữa panelGanttChart theo chiều ngang trong Form
-            panelGanttChart.Width = currentLeft + 20;
-            panelGanttChart.Left = (this.ClientSize.Width - panelGanttChart.Width) / 2;
+            panelGanttChart.Width = Math.Min(880, currentLeft + 20);
+            panelGanttChart.Left = Math.Max(34, (this.ClientSize.Width - panelGanttChart.Width) / 2);
         }
 
 

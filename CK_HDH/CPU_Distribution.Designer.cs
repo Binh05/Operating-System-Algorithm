@@ -66,7 +66,7 @@
             this.label1.ForeColor = System.Drawing.Color.Navy;
             this.label1.Location = new System.Drawing.Point(260, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(410, 32);
+            this.label1.Size = new System.Drawing.Size(534, 42);
             this.label1.TabIndex = 2;
             this.label1.Text = "Mô Phỏng Phân Phối Tiến Trình";
             // 
@@ -76,7 +76,7 @@
             this.label2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(74, 90);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(156, 22);
+            this.label2.Size = new System.Drawing.Size(197, 26);
             this.label2.TabIndex = 3;
             this.label2.Text = "Nhập số tiến trình";
             // 
@@ -87,7 +87,7 @@
             this.label3.ForeColor = System.Drawing.Color.Navy;
             this.label3.Location = new System.Drawing.Point(372, 158);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(187, 32);
+            this.label3.Size = new System.Drawing.Size(241, 42);
             this.label3.TabIndex = 4;
             this.label3.Text = "Bảng Dữ Liệu";
             // 
@@ -97,7 +97,7 @@
             this.label4.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(471, 91);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(147, 22);
+            this.label4.Size = new System.Drawing.Size(184, 26);
             this.label4.TabIndex = 5;
             this.label4.Text = "Chọn thuật toán ";
             // 
@@ -105,7 +105,7 @@
             // 
             this.txtP.Location = new System.Drawing.Point(236, 90);
             this.txtP.Name = "txtP";
-            this.txtP.Size = new System.Drawing.Size(77, 25);
+            this.txtP.Size = new System.Drawing.Size(77, 29);
             this.txtP.TabIndex = 6;
             // 
             // cbThuatToan
@@ -113,7 +113,7 @@
             this.cbThuatToan.FormattingEnabled = true;
             this.cbThuatToan.Location = new System.Drawing.Point(624, 90);
             this.cbThuatToan.Name = "cbThuatToan";
-            this.cbThuatToan.Size = new System.Drawing.Size(211, 25);
+            this.cbThuatToan.Size = new System.Drawing.Size(211, 29);
             this.cbThuatToan.TabIndex = 7;
             // 
             // btnLoad
@@ -146,37 +146,43 @@
             this.Priority});
             this.dgvTienTrinh.Location = new System.Drawing.Point(34, 205);
             this.dgvTienTrinh.Name = "dgvTienTrinh";
+            this.dgvTienTrinh.RowHeadersWidth = 51;
             this.dgvTienTrinh.Size = new System.Drawing.Size(880, 275);
             this.dgvTienTrinh.TabIndex = 10;
             // 
             // PID
             // 
             this.PID.HeaderText = "PID";
+            this.PID.MinimumWidth = 6;
             this.PID.Name = "PID";
+            this.PID.Width = 125;
             // 
             // ArrivalTime
             // 
             this.ArrivalTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ArrivalTime.HeaderText = "ArrivalTime";
+            this.ArrivalTime.MinimumWidth = 6;
             this.ArrivalTime.Name = "ArrivalTime";
             // 
             // BurstTime
             // 
             this.BurstTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.BurstTime.HeaderText = "BurstTime";
+            this.BurstTime.MinimumWidth = 6;
             this.BurstTime.Name = "BurstTime";
             // 
             // Priority
             // 
             this.Priority.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Priority.HeaderText = "Priority";
+            this.Priority.MinimumWidth = 6;
             this.Priority.Name = "Priority";
             // 
             // panelGanttChart
             // 
-            this.panelGanttChart.Location = new System.Drawing.Point(34, 507);
+            this.panelGanttChart.Location = new System.Drawing.Point(34, 498);
             this.panelGanttChart.Name = "panelGanttChart";
-            this.panelGanttChart.Size = new System.Drawing.Size(880, 82);
+            this.panelGanttChart.Size = new System.Drawing.Size(880, 103);
             this.panelGanttChart.TabIndex = 11;
             // 
             // button1
@@ -194,7 +200,7 @@
             // 
             // CPU_DistributionForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(949, 653);
             this.Controls.Add(this.button1);

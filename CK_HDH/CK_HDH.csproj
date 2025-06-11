@@ -58,11 +58,11 @@
     <Compile Include="CPU_Distribution.Designer.cs">
       <DependentUpon>CPU_Distribution.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dish_Scheduling.cs">
+    <Compile Include="Disk_Scheduling.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dish_Scheduling.Designer.cs">
-      <DependentUpon>Dish_Scheduling.cs</DependentUpon>
+    <Compile Include="Disk_Scheduling.Designer.cs">
+      <DependentUpon>Disk_Scheduling.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -84,8 +84,8 @@
     <EmbeddedResource Include="CPU_Distribution.resx">
       <DependentUpon>CPU_Distribution.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dish_Scheduling.resx">
-      <DependentUpon>Dish_Scheduling.cs</DependentUpon>
+    <EmbeddedResource Include="Disk_Scheduling.resx">
+      <DependentUpon>Disk_Scheduling.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
