@@ -28,10 +28,8 @@ namespace CK_HDH
         private void CPU_DistributionForm_Load(object sender, EventArgs e)
         {
             cbThuatToan.Items.Add("FCFS");
-            cbThuatToan.Items.Add("SJF (Non-Preemptive)");
-            cbThuatToan.Items.Add("SJF (Preemptive)");
-            cbThuatToan.Items.Add("SRTF (Non-Preemptive)");
-            cbThuatToan.Items.Add("SRTF (Preemptive)");
+            cbThuatToan.Items.Add("SJF");
+            cbThuatToan.Items.Add("SRTF");
             cbThuatToan.Items.Add("Round Robin");
             cbThuatToan.Items.Add("Priority (Non-Preemptive)");
             cbThuatToan.Items.Add("Priority (Preemptive)");
@@ -135,11 +133,8 @@ namespace CK_HDH
                 case "FCFS":
                     MoPhongFCFS(processes);
                     break;
-                case "SJF (Non-Preemptive)":
+                case "SJF":
                     MoPhongSJF_NonPreemptive(processes);
-                    break;
-                case "SJF (Preemptive)":
-                    MoPhongSJF_Preemptive(processes);
                     break;
                 case "Priority (Non-Preemptive)":
                     MoPhongPriority_NonPreemptive(processes);
@@ -151,10 +146,7 @@ namespace CK_HDH
                     int quantum = 2;
                     MoPhongRoundRobin(processes, quantum);
                     break;
-                case "SRTF (Non-Preemptive)":
-                    MoPhongSRTF_NonPreemptive(processes);
-                    break;
-                case "SRTF (Preemptive)":
+                case "SRTF":
                     MoPhongSRTF_Preemptive(processes);
                     break;
                 default:
@@ -252,95 +244,6 @@ namespace CK_HDH
             {
                 MessageBox.Show($"Error: {e.Message}");
             }
-        }
-
-        private void MoPhongSJF_Preemptive(List<Process> processes)
-        {
-            // Khởi tạo lại các trường cho từng process
-            foreach (var p in processes)
-            {
-                p.StartTime = -1;
-                p.CompleteTime = 0;
-                p.WaitingTime = 0;
-                p.TurnaroundTime = 0;
-            }
-
-            int n = processes.Count;
-            int time = 0;
-            int completed = 0;
-            var remainingTime = processes.ToDictionary(p => p.PID, p => p.BurstTime);
-
-            List<(int time, int pid)> gantt = new List<(int time, int pid)>();
-
-            while (completed < n)
-            {
-                // Chọn process có remaining nhỏ nhất và đã đến, chưa hoàn thành
-                var available = processes.Where(p => p.ArrivalTime <= time && remainingTime[p.PID] > 0);
-
-                Process current = null;
-                if (available.Any())
-                {
-                    int minBurst = available.Min(p => remainingTime[p.PID]);
-                    current = available.Where(p => remainingTime[p.PID] == minBurst)
-                                      .OrderBy(p => p.ArrivalTime)
-                                      .First();
-                }
-
-                if (current != null)
-                {
-                    if (current.StartTime == -1)
-                        current.StartTime = time;
-
-                    remainingTime[current.PID]--;
-                    gantt.Add((time, current.PID));
-
-                    if (remainingTime[current.PID] == 0)
-                    {
-                        current.CompleteTime = time + 1;
-                        current.TurnaroundTime = current.CompleteTime - current.ArrivalTime;
-                        current.WaitingTime = current.TurnaroundTime - current.BurstTime;
-                        completed++;
-                    }
-                }
-                else
-                {
-                    gantt.Add((time, -1)); // idle
-                }
-
-                time++;
-            }
-
-            // Gộp các block liên tiếp cùng PID lại để tạo tiến trình liên tục cho Gantt Chart
-            List<Process> ganttProcesses = new List<Process>();
-            int i = 0;
-            while (i < gantt.Count)
-            {
-                int start = gantt[i].time;
-                int pid = gantt[i].pid;
-                int length = 1;
-                i++;
-
-                while (i < gantt.Count && gantt[i].pid == pid)
-                {
-                    length++;
-                    i++;
-                }
-
-                if (pid != -1)
-                {
-                    var original = processes.First(p => p.PID == pid);
-                    ganttProcesses.Add(new Process
-                    {
-                        PID = pid,
-                        StartTime = start,
-                        BurstTime = length,
-                        CompleteTime = start + length
-                    });
-                }
-            }
-
-
-            VeBieuDoGantt(ganttProcesses);
         }
 
         private void MoPhongPriority_NonPreemptive(List<Process> processes)
@@ -519,57 +422,6 @@ namespace CK_HDH
                     p.TurnaroundTime = p.CompleteTime - p.ArrivalTime;
                     p.WaitingTime = p.TurnaroundTime - p.BurstTime;
                     completed++;
-                }
-            }
-
-            VeBieuDoGantt(ganttChart);
-        }
-
-        private void MoPhongSRTF_NonPreemptive(List<Process> processes)
-        {
-            int currentTime = 0, completed = 0;
-            var ganttChart = new List<Process>();
-            int n = processes.Count;
-
-            // Khởi tạo giá trị mặc định
-            foreach (var p in processes)
-            {
-                p.StartTime = -1;
-                p.CompleteTime = 0;
-                p.WaitingTime = 0;
-                p.TurnaroundTime = 0;
-            }
-
-            while (completed < n)
-            {
-                // Chọn tiến trình có thời gian thực thi ngắn nhất 
-                var current = processes
-                    .Where(p => p.ArrivalTime <= currentTime && p.CompleteTime == 0)
-                    .OrderBy(p => p.BurstTime)
-                    .ThenBy(p => p.ArrivalTime)
-                    .FirstOrDefault();
-
-                if (current != null)
-                {
-                    current.StartTime = currentTime;
-                    current.CompleteTime = currentTime + current.BurstTime;
-                    current.TurnaroundTime = current.CompleteTime - current.ArrivalTime;
-                    current.WaitingTime = current.TurnaroundTime - current.BurstTime;
-
-                    ganttChart.Add(new Process
-                    {
-                        PID = current.PID,
-                        StartTime = current.StartTime,
-                        BurstTime = current.BurstTime,
-                        CompleteTime = current.CompleteTime
-                    });
-
-                    currentTime = current.CompleteTime;
-                    completed++;
-                }
-                else
-                {
-                    currentTime++; // CPU rảnh
                 }
             }
 
