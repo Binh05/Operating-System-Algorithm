@@ -220,6 +220,7 @@ namespace CK_HDH
             }
         }
 
+        // Giải thuật kiểm tra an toàn
         private void btnRun_Click(object sender, EventArgs e)
         {
             int processCount = dgvAllocation.RowCount;
@@ -269,8 +270,8 @@ namespace CK_HDH
                         {
                             for (int j = 0; j < resourceCount; j++)
                                 work[j] += allocation[i, j];
-                            workHistory.Add((int[])work.Clone());
                             finish[i] = true;
+                            workHistory.Add((int[])work.Clone());                           
                             safeSequence.Add(i);
                             found = true;
                         }
@@ -316,13 +317,13 @@ namespace CK_HDH
 
         private void BankerForm_Load(object sender, EventArgs e)
         {
-            // Initialize DataGridViews with default values
+            // Khởi tạo DataGridView với giá trị mặc định
             SetupDgvMax(processCount, resourceCount);
             SetupDgvAllocation(processCount, resourceCount);
             SetupDgvAvailable(resourceCount);
 
 
-            // Setup initial request UI
+            // Thiết lập giao diện yêu cầu
             grbRequest.Visible = false;
             btnRequestResource.Visible = false;
             btnMultiRequest.Visible = false;
@@ -364,6 +365,7 @@ namespace CK_HDH
             btnMultiRequest.Visible = true;
         }
 
+        //Giải thuật cấp phát tài nguyên
         private void btnRequestResource_Click(object sender, EventArgs e)
         {
             if (cbbRequest.SelectedIndex == -1)
@@ -483,6 +485,7 @@ namespace CK_HDH
             DetectDeadlock();
         }
 
+        // Phát hiện deadlock
         private void DetectDeadlock()
         {
             int[,] allocation = GetMatrixFromDataGridView(dgvAllocation);
@@ -490,6 +493,20 @@ namespace CK_HDH
             int[] available = GetAvailableArray(dgvAvailable);
 
             bool[] finish = new bool[processCount];
+            for (int i = 0; i < processCount; i++)
+            {
+                for (int j = 0;j < resourceCount; j++)
+                {
+                    if (allocation[processCount,j] == 0)
+                    {
+                        finish[i] = true;
+                    }
+                    else
+                    {
+                        finish[i] = false;
+                    }
+                }
+            }
             int[] work = (int[])available.Clone();
             List<int[]> workHistory = new List<int[]>();
             workHistory.Add((int[])work.Clone());
